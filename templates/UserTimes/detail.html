@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1 style="color:darkslategray">You are looking at {{user1.user_name}}'s details</h1>
+<h2 style="color:blue">Details of the user</h2>
+<h3 style="color:orangered">Position:&nbsp{{ user1.position|capfirst }}<br/> Hours Required: {{ user1.hours_needed }} hours </h3>
+<p> <a href="{% url 'UserTimes:updateuser' user1.id %}">Update this user details</a></p>
+<br/> <p><a href="{%  url 'UserTimes:deleteuser' user1.id %}">Delete this User</a></p>
+{%  for sheet in user1.timesheet123_set.all %}
+    date :  {{ sheet.date_worked }} <br/>
+    Time : {{ sheet.time_from }} to {{ sheet.time_to }}<br/>
+    Total : {{ sheet.time_total }}&nbsp;
+    <p><a href="{% url 'UserTimes:sheetupdate' sheet.id user1.id %}">Update Time Sheet</a></p>
+    <p><a href="{% url 'UserTimes:sheetdelete' sheet.id user1.id%}">Delete this Time Sheet</a></p>
+    <br/>
+    ---------------------------------------------------------------<br/>
+{% endfor %}
+<p><strong><a href="{% url 'UserTimes:createtime' user1.id %}">Click here to enter a new TimeSheet</a></strong></p>
+</body>
+</html>

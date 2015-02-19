@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    {%  for user in all_users %}
+        <li><a href="/UserTimes/{{ user.id }}/">{{ user.user_name }}</a></li>
+    {% endfor %}
+
+</ul>
+<p> <strong> <a href="{% url 'UserTimes:createuser' %}">Click here to create a new user</a></strong></p>
+
+</body>
+</html>
