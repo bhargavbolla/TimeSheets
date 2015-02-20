@@ -20,4 +20,5 @@ urlpatterns = patterns('', url(r'^$', login_required(views.IndexView.as_view()),
                        url(r'^login/$', 'django.contrib.auth.views.login',
                            {'template_name': 'registration/login.html'}),
                        url(r'^logout/$', 'django.contrib.auth.views.logout'),
+                       url(r'^register/$', views.UserCreate.as_view(), name='register'),
                        )
