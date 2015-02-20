@@ -18,6 +18,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user
+from django.db import IntegrityError
 
 
 class UserCreate(generic.CreateView):
@@ -77,11 +79,20 @@ class createuser(generic.CreateView):
     model = User123
     template_name = 'UserTimes/createuser.html'
     form = UserForm
+    fields = ('position', 'hours_needed')
 
     def form_valid(self, form):
+        user_name = get_user(self.request)
+        form.instance.user_name = user_name
         obj = form.save(commit=False)
-        obj.save()
+        try:
+            obj.save()
+        except IntegrityError:
+            return HttpResponse("It seems you already have created your <b>username:</b> "+user_name.username+" to log time, please use it!"
+                                + "<a href= "+reverse('UserTimes:index')+"> click here to go back <a/>")
+
         return HttpResponseRedirect(reverse('UserTimes:detail', kwargs={'pk': obj.pk}))
+
 
 
 

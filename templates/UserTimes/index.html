@@ -7,7 +7,7 @@
 <body>
 <ul>
     {%  for user in all_users %}
-        <li><a href="/UserTimes/{{ user.id }}/">{{ user.user_name }}</a></li>
+        <li><a href="/UserTimes/{{ user.id }}/">{{ user.user_name|capfirst }}</a></li>
     {% endfor %}
 
 </ul>
