@@ -10,6 +10,27 @@ from django.core.urlresolvers import reverse_lazy
 from .forms import UserForm, TimeSheetform
 import datetime
 from django.views import generic
+from django.contrib.auth import authenticate, login, logout
+
+"""simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
+def login_page(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # redirect to success page!
+        else:
+            """ Here goes disabled account page """
+
+    else:
+        """ here invalid login error message set that variable here??"""
+
+
+def logout_view(request):
+    logout(request)
+    # here goes a success page.
 
 
 class IndexView(generic.ListView):
