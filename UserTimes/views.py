@@ -40,7 +40,7 @@ class UserCreate(generic.CreateView):
 """simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
 
 
-"""# @login_required(login_url='/login')
+# @login_required(login_url='/login')
 def login_page(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -50,15 +50,15 @@ def login_page(request):
             login(request, user)
             # redirect to success page!
         else:
-            Here goes disabled account page
+            """ Here goes disabled account page """
 
     else:
-         here invalid login error message set that variable here??
+        """ here invalid login error message set that variable here??"""
 
 
 def logout_view(request):
     logout(request)
-    # here goes a success page."""
+    # here goes a success page.
 
 
 class IndexView(generic.ListView):
