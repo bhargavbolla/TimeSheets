@@ -14,17 +14,26 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserCreateForm
+from django.contrib.auth.models import User
+from django.db import models
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 
 class UserCreate(generic.CreateView):
-    model = UserProfile
+    model = User
     template_name = 'UserTimes/createuser.html'
-    # form = UserCreateForm
+    form_class = UserCreationForm
 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
         return HttpResponseRedirect(reverse('UserTimes:index'))
+
+
+
+
+
 
 """simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
 
@@ -106,6 +115,7 @@ class TimeCreate(CreateView):
         user_field = form_class.base_fields['user']
         user_field.initial = user_pk
         return form_class"""
+
 
 class UserUpdate(UpdateView):
     model = User123

@@ -22,7 +22,7 @@ class TimeSheetform(forms.ModelForm):
 
 
 class UserCreateForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    fields = ('username', 'password', 'email')
 
     class Meta:
-        model = UserProfile
+        model = User
