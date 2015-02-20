@@ -2,10 +2,12 @@ __author__ = 'BhargavKumarReddy'
 from django.conf.urls import patterns, url
 from UserTimes.models import User123,TimeSheet123
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 from UserTimes import views
 
-urlpatterns = patterns('', url(r'^$', views.IndexView.as_view(), name='index'),
+urlpatterns = patterns('', url(r'^$', login_required(views.IndexView.as_view()),
+                               name='index'),
                        url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
                        url(r'^(?P<pk>\d+)/create/$', views.TimeCreate.as_view(), name='createtime'),
                        url(r'^create/$', views.createuser.as_view(), name='createuser'),

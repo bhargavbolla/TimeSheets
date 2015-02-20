@@ -89,3 +89,5 @@ TEMPLATE_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/UserTimes/'
+
+LOGIN_URL = 'login/'

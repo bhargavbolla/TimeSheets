@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 """simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
 
 
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def login_page(request):
     username = request.POST['username']
     password = request.POST['password']
