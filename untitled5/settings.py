@@ -87,3 +87,5 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
     os.path.join(BASE_DIR, 'templates/registration')
 )
+
+LOGIN_REDIRECT_URL = '/UserTimes/'
