@@ -85,5 +85,5 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
-    os.path.join(BASE_DIR, 'templates/Registration')
+    os.path.join(BASE_DIR, 'templates/registration')
 )

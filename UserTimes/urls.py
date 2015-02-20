@@ -15,6 +15,7 @@ urlpatterns = patterns('', url(r'^$', views.IndexView.as_view(), name='index'),
                        url(r'^(?P<pk>\d+)/delete/$', views.User_Delete.as_view(), name='deleteuser'),
                        url(r'^(?P<pk>\d+)/(?P<tpk>\d+)/deletetime/$', views.Time_Sheet_Delete.as_view(),
                            name='sheetdelete'),
-                       url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+                       url(r'^login/$', 'django.contrib.auth.views.login',
+                           {'template_name': 'registration/login.html'}),
                        url(r'^logout/$', 'django.contrib.auth.views.logout'),
                        )
