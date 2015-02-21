@@ -19,6 +19,7 @@ urlpatterns = patterns('', url(r'^$', login_required(views.IndexView.as_view()),
                            name='sheetdelete'),
                        url(r'^login/$', 'django.contrib.auth.views.login',
                            {'template_name': 'registration/login.html'}),
-                       url(r'^logout/$', 'django.contrib.auth.views.logout'),
+                       url(r'^logout/$', 'django.contrib.auth.views.logout',
+                           {'template_name': 'registration/logout.html'}, name='logout'),
                        url(r'^register/$', views.UserCreate.as_view(), name='register'),
                        )

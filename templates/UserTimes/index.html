@@ -5,8 +5,8 @@
     <title></title>
 </head>
 <body>
+<p> <a href="{% url 'UserTimes:logout' %}">logout</a></p>
 <ul>
-
         {% csrf_token %}
         <li><a href="/UserTimes/{{ all_users.id }}/">{{ all_users.user_name.username|capfirst }}</a></li>
 

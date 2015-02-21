@@ -7,6 +7,7 @@
 <body>
 
 <h1 style="color:darkslategray">Hello {{user1.user_name|capfirst}}!</h1>
+<p> <a href="{% url 'UserTimes:logout' %}">logout</a></p>
 <h2 style="color:blue">Details of the user</h2>
 <h3 style="color:orangered">Position:&nbsp{{ user1.position|capfirst }}<br/> Hours Required: {{ user1.hours_needed }} hours </h3>
 <p> <a href="{% url 'UserTimes:updateuser' user1.id %}">Update this user details</a></p>
