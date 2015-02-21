@@ -73,6 +73,9 @@ class DetailView(generic.DetailView):
     template_name = 'UserTimes/detail.html'
     context_object_name = 'user1'
 
+    def get_object(self, queryset=None):
+        return User123.objects.get(user_name=get_user(self.request))
+
 
 class createuser(generic.CreateView):
     model = User123
