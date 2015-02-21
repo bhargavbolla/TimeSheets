@@ -32,11 +32,6 @@ class UserCreate(generic.CreateView):
         obj.save()
         return HttpResponseRedirect(reverse('UserTimes:index'))
 
-
-
-
-
-
 """simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
 
 
@@ -66,7 +61,7 @@ class IndexView(generic.ListView):
     context_object_name = 'all_users'
 
     def get_queryset(self):
-        return User123.objects.all()
+        return User123.objects.get(user_name=get_user(self.request))
 
 
 class DetailView(generic.DetailView):

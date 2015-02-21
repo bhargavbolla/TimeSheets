@@ -8,7 +8,7 @@ class User123(models.Model):
     hours_needed = models.PositiveIntegerField(default=80)
 
     def __unicode__(self):
-        return self.user_name
+        return self.user_name.username
 
 
 class TimeSheet123(models.Model):

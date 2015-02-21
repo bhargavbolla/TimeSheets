@@ -6,9 +6,10 @@
 </head>
 <body>
 <ul>
-    {%  for user in all_users %}
-        <li><a href="/UserTimes/{{ user.id }}/">{{ user.user_name|capfirst }}</a></li>
-    {% endfor %}
+
+        {% csrf_token %}
+        <li><a href="/UserTimes/{{ all_users.id }}/">{{ all_users.user_name.username|capfirst }}</a></li>
+
 
 </ul>
 <p> <strong> <a href="{% url 'UserTimes:createuser' %}">Click here to create a new user</a></strong></p>
