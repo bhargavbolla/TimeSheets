@@ -96,10 +96,6 @@ class createuser(generic.CreateView):
         return HttpResponseRedirect(reverse('UserTimes:detail', kwargs={'pk': obj.pk}))
 
 
-
-
-
-
 class TimeCreate(CreateView):
     model = TimeSheet123
     template_name = 'UserTimes/createtime.html'
