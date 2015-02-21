@@ -20,6 +20,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserCreate(generic.CreateView):
@@ -61,7 +62,10 @@ class IndexView(generic.ListView):
     context_object_name = 'all_users'
 
     def get_queryset(self):
-        return User123.objects.get(user_name=get_user(self.request))
+        try:
+            return User123.objects.get(user_name=get_user(self.request))
+        except ObjectDoesNotExist:
+            return ""
 
 
 class DetailView(generic.DetailView):
