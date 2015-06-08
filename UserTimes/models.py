@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 
 
 class User123(models.Model):
-    user_name = models.CharField(max_length=200)
+    user_name = models.OneToOneField(User)
     position = models.CharField(max_length=200)
     hours_needed = models.PositiveIntegerField(default=80)
 
     def __unicode__(self):
-        return self.user_name
+        return self.user_name.username
 
 
 class TimeSheet123(models.Model):

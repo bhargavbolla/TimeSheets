@@ -85,4 +85,9 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates/registration')
 )
+
+LOGIN_REDIRECT_URL = '/UserTimes/'
+
+LOGIN_URL = '/UserTimes/login/'

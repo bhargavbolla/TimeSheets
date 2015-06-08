@@ -10,6 +10,51 @@ from django.core.urlresolvers import reverse_lazy
 from .forms import UserForm, TimeSheetform
 import datetime
 from django.views import generic
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .models import UserProfile
+from .forms import UserCreateForm
+from django.contrib.auth.models import User
+from django.db import models
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user
+from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+
+
+class UserCreate(generic.CreateView):
+    model = User
+    template_name = 'UserTimes/createuser.html'
+    form_class = UserCreationForm
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.save()
+        return HttpResponseRedirect(reverse('UserTimes:index'))
+
+"""simple way to check if logged in  or not is by checking request.user.is_authenticated()"""
+
+
+# @login_required(login_url='/login')
+def login_page(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # redirect to success page!
+        else:
+            """ Here goes disabled account page """
+
+    else:
+        """ here invalid login error message set that variable here??"""
+
+
+def logout_view(request):
+    logout(request)
+    # here goes a success page.
 
 
 class IndexView(generic.ListView):
@@ -17,7 +62,10 @@ class IndexView(generic.ListView):
     context_object_name = 'all_users'
 
     def get_queryset(self):
-        return User123.objects.all()
+        try:
+            return User123.objects.get(user_name=get_user(self.request))
+        except ObjectDoesNotExist:
+            return ""
 
 
 class DetailView(generic.DetailView):
@@ -25,19 +73,27 @@ class DetailView(generic.DetailView):
     template_name = 'UserTimes/detail.html'
     context_object_name = 'user1'
 
+    def get_object(self, queryset=None):
+        return User123.objects.get(user_name=get_user(self.request))
+
 
 class createuser(generic.CreateView):
     model = User123
     template_name = 'UserTimes/createuser.html'
     form = UserForm
+    fields = ('position', 'hours_needed')
 
     def form_valid(self, form):
+        user_name = get_user(self.request)
+        form.instance.user_name = user_name
         obj = form.save(commit=False)
-        obj.save()
+        try:
+            obj.save()
+        except IntegrityError:
+            return HttpResponse("It seems you already have created your <b>username:</b> "+user_name.username+" to log time, please use it!"
+                                + "<a href= "+reverse('UserTimes:index')+"> click here to go back <a/>")
+
         return HttpResponseRedirect(reverse('UserTimes:detail', kwargs={'pk': obj.pk}))
-
-
-
 
 
 class TimeCreate(CreateView):
@@ -68,6 +124,7 @@ class TimeCreate(CreateView):
         user_field = form_class.base_fields['user']
         user_field.initial = user_pk
         return form_class"""
+
 
 class UserUpdate(UpdateView):
     model = User123

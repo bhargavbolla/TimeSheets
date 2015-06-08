@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from UserTimes.models import User123, TimeSheet123, UserProfile
+from  django.contrib.auth.models import User
 
 
 class Timeinline(admin.StackedInline):
@@ -11,7 +12,9 @@ class Timeinline(admin.StackedInline):
 class UserAdmin(admin.ModelAdmin):
     inlines = [Timeinline]
 
-admin.site.register(UserProfile)
+# admin.site.register(UserProfile)
 
 admin.site.register(User123, UserAdmin)
+
+
 # Register your models here.
